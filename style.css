@@ -1,0 +1,168 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+/* 
+The active selection is a CSS rule that applies to all elements 
+on the web page. The asterisk (`*`) is a universal selector, 
+which means it targets every single element in the document. 
+By setting both the `margin` and `padding` properties to `0`, 
+this rule effectively removes any default spacing that browsers 
+might apply to elements.
+Browsers typically have their own default styles for elements, 
+which can include margins and padding. These defaults can vary 
+between browsers, leading to inconsistencies in how a 
+web page is displayed. By using this universal reset, 
+you ensure that all elements start with no margin or padding, 
+providing a clean slate for further styling. 
+This approach is common in CSS resets or normalization stylesheets, 
+which aim to create a consistent baseline across different browsers. */
+
+html {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
+  text-align: center;
+}
+
+body {
+  padding: min(50px, 7%);
+  background-color: rgb(13, 13, 20);
+}
+/*  
+   padding: min(50px, 7%) - dynamic padding value that uses the min() function to choose the smaller
+                            of two values: 50px or 7% 
+   How it Works
+   1. min() function:
+     - evalautes multiple values and selects the smallest one.
+     - it compares;
+       50px: a fixed, absolute value.
+       7%  : a % value relative to the containing block's width.
+
+   2. Dynamic Behavior:
+     - Smaller Screens: if 7% of the container's width is smaller than 50px, the padding will be 7%.
+     - Larger  Screens: if 7% of the container's width exeeds 50px. the padding will be capped at 50px.
+
+     SCENARIO
+
+     body {
+       padding: min(50px, 7%)
+     }
+
+    On Different Screen Sizes:
+
+     Small Container(e.g 500px wide)
+     - 7% of 500px = 35px
+     - the smaller value is 35px, so padding is 35px.
+
+     Larger Container(e.g 1000px wide)
+     - 7% of 1000px = 70px
+     - the smaller value is 50px, so padding is 50px.     
+
+
+    Why Use This?
+     
+     The min() function is particularly useful for responsive design:
+     
+     1. Preventing Excessive Padding:
+        - On larger screens, the min() ensures the padding doesn’t grow too 
+          large (capped at 50px in this case).
+    
+     2. Maintaining Proportional Padding:
+        - On smaller screens, 7% ensures the padding remains proportional 
+          to the container size, creating a balanced layout.
+
+       
+    When to Use This?
+     
+     For layouts where you want responsive spacing that doesn’t exceed a reasonable fixed size.
+     
+     Examples:
+        - Headers, footers, or containers where padding needs to scale but not dominate the layout.   
+        - Mobile-first designs, where you want to avoid large padding on small screens.  
+
+
+    Recommended Values:
+    
+    Use Case	                    Fixed Value (px)	                    Percentage (%)
+   
+    Text-heavy sections	              16px - 24px	                          5% - 7%
+    Hero sections	                  32px - 40px	                          6% - 8%
+    Mobile-first design	              12px - 20px	                          4% - 6%
+    Compact components	              8px  - 16px	                          3% - 5%
+*/
+
+h1 {
+  margin: 30px 0;
+  padding: min(12px, 6%);
+}
+h2 {
+  margin: 15px 0;
+  padding: min(8px, 3%);
+}
+/* 30px: top and bottom 
+    0px: left and right
+
+    This means each h1 element will have this padding applied to them.
+*/
+.card {
+  padding: min(32px, 8%);
+  border: 1px solid rgb(75, 82, 92);
+  border-radius: 10px;
+  background-color: #222429;
+  text-align: center;
+}
+
+.grid-container {
+  display: grid;
+  border: 1px solid red;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 10px;
+  justify-content: center;
+}
+
+/* grid-template-columns: repeat(10, 300px);
+    
+1.  repeat(10, 300px)
+    10    : how many times grid-items do you want to repeat.
+    300px : the value that will repeat.
+   
+2.  repeat(10, 1fr)
+    10    : how many times grid-items do you want to repeat.
+    1fr   : each grid-item has equal amount of available space
+
+3.  repeat(autofit, 300px)
+    autofit    : check how many times can we fit 300px grid-items next to each other
+                - this makes grid-items jump to rows below if there's no enough space above.  
+                - or jump up if there's enough space for 2,3 ...   
+    300px      : the value that will repeat.
+
+4.   justify-content: center;
+    -very impotant as it makes grid-items take the central part of the screen
+    
+
+5. FINALY: The altimate solution
+   
+   repeat(auto-fit, minmax(300px, 1fr));
+
+   repeat()  - allows you to repeat a pettern of columns
+   auto-fit  - the grid will automatically adjust the number of columns to fit 
+               the available space.
+   minmax(300px, 1fr) - sets a flexible size for each column.
+   
+   minmax()  - takes 2 arguments
+              1. a minimum value
+              2. a maximum value
+   - here, each column will have a minimun width of 300px &
+   - a maximum width of 1fr
+   1fr - it is one fraction of available space
+   
+   - Therefore ; this setup ensure that each column will be at least 300px wide but,
+   - can grow to fill the remaining space propotionally.
+   
+   - The comnination of autofit and minmax() create a responsive grid layout 
+     that adapts to different screen sizes.
+    
+     On Larger  Screens: more columns will fit within the container.
+     On Smaller Screens: fewer columns will be displayed, each maintaining a
+                         a minimum width of 300px.
+*/
